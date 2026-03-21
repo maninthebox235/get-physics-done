@@ -1,8 +1,8 @@
 {
   "project_reference": {
-    "project_md_updated": null,
-    "core_research_question": null,
-    "current_focus": null
+    "project_md_updated": "2026-03-21",
+    "core_research_question": "Can zero-point energy of the quantum vacuum be extracted as usable work through cyclic processes involving boundary condition changes?",
+    "current_focus": "Phase 01 -- No-Go Theorem Derivations"
   },
   "project_contract": {
     "schema_version": 1,
@@ -404,14 +404,14 @@
     }
   },
   "position": {
-    "current_phase": null,
-    "current_phase_name": null,
-    "total_phases": null,
+    "current_phase": "01",
+    "current_phase_name": "No-Go Theorem Derivations",
+    "total_phases": 7,
     "current_plan": null,
     "total_plans_in_phase": null,
-    "status": null,
-    "last_activity": null,
-    "last_activity_desc": null,
+    "status": "ready_to_plan",
+    "last_activity": "2026-03-21",
+    "last_activity_desc": "Project initialization complete; roadmap created with 7 phases",
     "progress_percent": 0,
     "paused_at": null
   },
@@ -428,11 +428,11 @@
   "decisions": [],
   "approximations": [],
   "convention_lock": {
-    "metric_signature": null,
-    "fourier_convention": null,
-    "natural_units": null,
+    "metric_signature": "mostly-minus",
+    "fourier_convention": "physics",
+    "natural_units": "natural",
     "gauge_choice": null,
-    "regularization_scheme": null,
+    "regularization_scheme": "zeta",
     "renormalization_scheme": null,
     "coordinate_system": null,
     "spin_basis": null,
@@ -446,7 +446,12 @@
     "covariant_derivative_sign": null,
     "gamma_matrix_convention": null,
     "creation_annihilation_order": null,
-    "custom_conventions": {}
+    "custom_conventions": {
+      "casimir_force_sign": "F < 0 for attractive (plates pulled together)",
+      "casimir_energy_sign": "E < 0 for bound configuration lower than unbounded",
+      "matsubara_prime_sum": "l=0 term carries half weight in primed sum notation",
+      "work_sign": "W_net > 0 means net energy extracted by the system; W_net <= 0 is the no-go claim"
+    }
   },
   "propagated_uncertainties": [],
   "pending_todos": [],
