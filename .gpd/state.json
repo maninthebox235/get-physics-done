@@ -1,0 +1,459 @@
+{
+  "project_reference": {
+    "project_md_updated": null,
+    "core_research_question": null,
+    "current_focus": null
+  },
+  "project_contract": {
+    "schema_version": 1,
+    "scope": {
+      "question": "Can zero-point energy of the quantum vacuum be extracted as usable work through cyclic processes involving boundary condition changes?",
+      "in_scope": [
+        "T=0 and finite-T Casimir energy and force for parallel plates",
+        "Ideal and realistic (Drude/plasma) material response",
+        "Quasi-static plate separation cycles with full thermodynamic analysis",
+        "Three no-go arguments (thermodynamic, Lorentz invariance, passivity) with explicit assumptions",
+        "Four loophole classes: boundary condition changes, topology changes, non-equilibrium states, dynamic Casimir",
+        "Extension to sphere-plate geometry as stretch goal"
+      ],
+      "out_of_scope": [
+        "Experimental apparatus design",
+        "Dark energy / cosmological constant problem",
+        "Stochastic electrodynamics (SED) as competing framework",
+        "Engineering feasibility of Casimir devices"
+      ],
+      "unresolved_questions": [
+        "Which reference is the definitive formulation of the passivity theorem for QFT vacuum states?",
+        "What is the correct energy accounting for the dynamic Casimir effect \u2014 is photon production from vacuum genuinely 'extraction'?",
+        "Whether topology changes (creating/removing a cavity) constitute a distinct loophole or reduce to boundary condition changes"
+      ]
+    },
+    "context_intake": {
+      "must_read_refs": [
+        "ref-casimir-1948",
+        "ref-lifshitz-1956"
+      ],
+      "must_include_prior_outputs": [],
+      "user_asserted_anchors": [
+        "Casimir force F = -pi^2 hbar c / (240 a^4) for ideal parallel plates at T=0",
+        "Lifshitz formula for finite-T and real-material Casimir force"
+      ],
+      "known_good_baselines": [],
+      "context_gaps": [
+        "Definitive reference for passivity of quantum vacuum states not yet identified",
+        "Benchmark reference for dynamic Casimir photon spectrum not yet selected"
+      ],
+      "crucial_inputs": [
+        "Energy budget must account for every joule in the cycle",
+        "W_net parameter sweep must cover (a_min, a_max, T) space",
+        "Energy budget and parameter sweep must agree on sign of W_net",
+        "Three no-go arguments must give consistent assumptions or inconsistency is itself a result"
+      ]
+    },
+    "approach_policy": {
+      "formulations": [
+        "QFT vacuum energy with boundary conditions (Casimir framework)",
+        "Thermodynamic free energy analysis of cyclic processes",
+        "Quantum passivity and the structure of the vacuum state"
+      ],
+      "allowed_estimator_families": [],
+      "forbidden_estimator_families": [],
+      "allowed_fit_families": [],
+      "forbidden_fit_families": [],
+      "stop_and_rethink_conditions": [
+        "W_net > 0 found in quasi-static regime \u2014 verify before claiming loophole",
+        "Three no-go arguments give inconsistent assumptions",
+        "Realistic material properties qualitatively change the conclusion vs ideal conductors"
+      ]
+    },
+    "observables": [
+      {
+        "id": "obs-wnet",
+        "name": "Net work per cycle W_net",
+        "kind": "curve",
+        "definition": "Total work extracted minus work input over one complete quasi-static plate separation cycle, as a function of cycle parameters (a_min, a_max, T)",
+        "regime": null,
+        "units": null
+      },
+      {
+        "id": "obs-casimir-force",
+        "name": "Casimir force F(a)",
+        "kind": "curve",
+        "definition": "Force between parallel plates as function of separation, for ideal and realistic materials at T=0 and finite T",
+        "regime": null,
+        "units": null
+      },
+      {
+        "id": "obs-free-energy",
+        "name": "Helmholtz free energy F(a,T)",
+        "kind": "map",
+        "definition": "Helmholtz free energy of the plate system as function of separation and temperature",
+        "regime": null,
+        "units": null
+      },
+      {
+        "id": "obs-nogo-assumptions",
+        "name": "No-go theorem assumption set",
+        "kind": "classification",
+        "definition": "The explicit set of assumptions required by each of the three no-go arguments, and whether they are consistent",
+        "regime": null,
+        "units": null
+      }
+    ],
+    "claims": [
+      {
+        "id": "claim-cycle-work",
+        "statement": "A complete quasi-static Casimir plate cycle yields W_net <= 0, meaning no net work can be extracted from ZPE via this mechanism",
+        "observables": [
+          "obs-wnet",
+          "obs-free-energy"
+        ],
+        "deliverables": [
+          "deliv-energy-budget",
+          "deliv-param-sweep"
+        ],
+        "acceptance_tests": [
+          "test-energy-budget-consistency",
+          "test-casimir-benchmark"
+        ],
+        "references": [
+          "ref-casimir-1948"
+        ]
+      },
+      {
+        "id": "claim-nogo-consistency",
+        "statement": "Three independent no-go arguments (thermodynamic, Lorentz invariance, passivity) give consistent conclusions under overlapping assumptions",
+        "observables": [
+          "obs-nogo-assumptions"
+        ],
+        "deliverables": [
+          "deliv-nogo-derivation"
+        ],
+        "acceptance_tests": [
+          "test-nogo-consistency"
+        ],
+        "references": []
+      },
+      {
+        "id": "claim-loophole-analysis",
+        "statement": "Four potential loopholes (boundary changes, topology, non-equilibrium, dynamic Casimir) are tested against the no-go assumptions and classified as genuine or apparent",
+        "observables": [
+          "obs-wnet",
+          "obs-nogo-assumptions"
+        ],
+        "deliverables": [
+          "deliv-loophole-report"
+        ],
+        "acceptance_tests": [
+          "test-loophole-energy-accounting"
+        ],
+        "references": [
+          "ref-casimir-1948",
+          "ref-lifshitz-1956"
+        ]
+      }
+    ],
+    "deliverables": [
+      {
+        "id": "deliv-energy-budget",
+        "kind": "table",
+        "path": null,
+        "description": "Complete energy budget for quasi-static parallel plate Casimir cycle showing where every joule goes",
+        "must_contain": [
+          "work input",
+          "work output",
+          "vacuum energy change",
+          "radiation if any",
+          "net work W_net"
+        ]
+      },
+      {
+        "id": "deliv-param-sweep",
+        "kind": "figure",
+        "path": null,
+        "description": "Parameter sweep plot of W_net vs (a_min, a_max, T) showing sign of net work everywhere",
+        "must_contain": [
+          "W_net contour or heatmap",
+          "sign boundary if exists",
+          "ideal and realistic material cases"
+        ]
+      },
+      {
+        "id": "deliv-nogo-derivation",
+        "kind": "derivation",
+        "path": null,
+        "description": "Formal derivation of three no-go arguments with explicit assumption lists and consistency analysis",
+        "must_contain": [
+          "thermodynamic argument",
+          "Lorentz invariance argument",
+          "passivity argument",
+          "assumption comparison table"
+        ]
+      },
+      {
+        "id": "deliv-loophole-report",
+        "kind": "report",
+        "path": null,
+        "description": "Analysis of four potential loopholes tested against no-go theorem assumptions",
+        "must_contain": [
+          "boundary condition changes",
+          "topology changes",
+          "non-equilibrium states",
+          "dynamic Casimir effect",
+          "verdict for each"
+        ]
+      },
+      {
+        "id": "deliv-casimir-reproduction",
+        "kind": "figure",
+        "path": null,
+        "description": "Reproduction of known Casimir force and Lifshitz formula as validation benchmark",
+        "must_contain": [
+          "F(a) vs known result",
+          "relative error",
+          "ideal and realistic material cases"
+        ]
+      }
+    ],
+    "acceptance_tests": [
+      {
+        "id": "test-energy-budget-consistency",
+        "subject": "claim-cycle-work",
+        "kind": "consistency",
+        "procedure": "Verify energy budget (table) and W_net parameter sweep (figure) agree on sign of net work for all tested parameter values",
+        "pass_condition": "No parameter point where energy budget says W_net > 0 but sweep says W_net <= 0 or vice versa",
+        "evidence_required": [
+          "deliv-energy-budget",
+          "deliv-param-sweep"
+        ],
+        "automation": "automated"
+      },
+      {
+        "id": "test-casimir-benchmark",
+        "subject": "claim-cycle-work",
+        "kind": "benchmark",
+        "procedure": "Compare computed Casimir force against F = -pi^2 hbar c / (240 a^4) for ideal plates at T=0",
+        "pass_condition": "Relative error < 1e-6 for ideal plates; reproduce Lifshitz formula within numerical precision for realistic materials",
+        "evidence_required": [
+          "deliv-casimir-reproduction",
+          "ref-casimir-1948",
+          "ref-lifshitz-1956"
+        ],
+        "automation": "automated"
+      },
+      {
+        "id": "test-nogo-consistency",
+        "subject": "claim-nogo-consistency",
+        "kind": "consistency",
+        "procedure": "Check that the three no-go arguments do not require mutually contradictory assumptions",
+        "pass_condition": "Assumptions form a consistent set, or any inconsistency is identified and explained",
+        "evidence_required": [
+          "deliv-nogo-derivation"
+        ],
+        "automation": "human"
+      },
+      {
+        "id": "test-loophole-energy-accounting",
+        "subject": "claim-loophole-analysis",
+        "kind": "consistency",
+        "procedure": "For each loophole, verify complete energy accounting including all costs (work to change boundaries, radiation losses, etc.)",
+        "pass_condition": "Each loophole has a definitive verdict (genuine or apparent) supported by energy accounting",
+        "evidence_required": [
+          "deliv-loophole-report",
+          "deliv-energy-budget"
+        ],
+        "automation": "hybrid"
+      }
+    ],
+    "references": [
+      {
+        "id": "ref-casimir-1948",
+        "kind": "paper",
+        "locator": "H.B.G. Casimir, Proc. K. Ned. Akad. Wet. 51, 793 (1948)",
+        "aliases": [
+          "casimir-original"
+        ],
+        "role": "benchmark",
+        "why_it_matters": "Defines the ideal parallel-plate Casimir force F = -pi^2 hbar c / (240 a^4) that must be reproduced",
+        "applies_to": [
+          "claim-cycle-work"
+        ],
+        "carry_forward_to": [
+          "planning",
+          "execution",
+          "verification",
+          "writing"
+        ],
+        "must_surface": true,
+        "required_actions": [
+          "read",
+          "compare",
+          "cite"
+        ]
+      },
+      {
+        "id": "ref-lifshitz-1956",
+        "kind": "paper",
+        "locator": "E.M. Lifshitz, Sov. Phys. JETP 2, 73 (1956)",
+        "aliases": [
+          "lifshitz-formula"
+        ],
+        "role": "benchmark",
+        "why_it_matters": "Finite-temperature, real-material Casimir force formula \u2014 essential benchmark for realistic material calculations",
+        "applies_to": [
+          "claim-cycle-work"
+        ],
+        "carry_forward_to": [
+          "planning",
+          "execution",
+          "verification",
+          "writing"
+        ],
+        "must_surface": true,
+        "required_actions": [
+          "read",
+          "compare",
+          "cite"
+        ]
+      }
+    ],
+    "forbidden_proxies": [
+      {
+        "id": "fp-attractive-force",
+        "subject": "claim-cycle-work",
+        "proxy": "Showing the Casimir force is attractive between plates",
+        "reason": "Attractive force does not imply net work extraction over a complete cycle"
+      },
+      {
+        "id": "fp-static-energy",
+        "subject": "claim-cycle-work",
+        "proxy": "Reproducing Casimir energy E(a) without analyzing a complete thermodynamic cycle",
+        "reason": "Static energy calculation does not address whether cyclic extraction is possible"
+      },
+      {
+        "id": "fp-one-shot",
+        "subject": "claim-cycle-work",
+        "proxy": "One-shot energy release when plates collapse without accounting for separation cost",
+        "reason": "Cycle must close \u2014 total work includes cost to restore initial configuration"
+      }
+    ],
+    "links": [
+      {
+        "id": "link-budget-to-claim",
+        "source": "claim-cycle-work",
+        "target": "deliv-energy-budget",
+        "relation": "supports",
+        "verified_by": [
+          "test-energy-budget-consistency"
+        ]
+      },
+      {
+        "id": "link-sweep-to-claim",
+        "source": "claim-cycle-work",
+        "target": "deliv-param-sweep",
+        "relation": "supports",
+        "verified_by": [
+          "test-energy-budget-consistency"
+        ]
+      },
+      {
+        "id": "link-benchmark-to-claim",
+        "source": "deliv-casimir-reproduction",
+        "target": "claim-cycle-work",
+        "relation": "benchmarks",
+        "verified_by": [
+          "test-casimir-benchmark"
+        ]
+      },
+      {
+        "id": "link-nogo-to-claim",
+        "source": "claim-nogo-consistency",
+        "target": "deliv-nogo-derivation",
+        "relation": "supports",
+        "verified_by": [
+          "test-nogo-consistency"
+        ]
+      },
+      {
+        "id": "link-loophole-to-claim",
+        "source": "claim-loophole-analysis",
+        "target": "deliv-loophole-report",
+        "relation": "supports",
+        "verified_by": [
+          "test-loophole-energy-accounting"
+        ]
+      }
+    ],
+    "uncertainty_markers": {
+      "weakest_anchors": [
+        "Passivity theorem reference \u2014 definitive formulation for QFT vacuum not yet identified",
+        "Whether dynamic Casimir photon production constitutes genuine ZPE extraction or is powered by the mirror's kinetic energy"
+      ],
+      "unvalidated_assumptions": [
+        "Quasi-static approximation valid for the plate separation cycle",
+        "Perfect conductor boundary conditions capture the essential physics before material corrections"
+      ],
+      "competing_explanations": [
+        "Some authors (Puthoff, SED community) argue ZPE is extractable \u2014 our analysis should be able to identify where their reasoning diverges from standard QFT"
+      ],
+      "disconfirming_observations": [
+        "W_net > 0 found in quasi-static regime would indicate a genuine loophole",
+        "Three no-go arguments give mutually inconsistent assumptions",
+        "Realistic material properties qualitatively change the extraction conclusion vs ideal conductors"
+      ]
+    }
+  },
+  "position": {
+    "current_phase": null,
+    "current_phase_name": null,
+    "total_phases": null,
+    "current_plan": null,
+    "total_plans_in_phase": null,
+    "status": null,
+    "last_activity": null,
+    "last_activity_desc": null,
+    "progress_percent": 0,
+    "paused_at": null
+  },
+  "active_calculations": [],
+  "intermediate_results": [],
+  "open_questions": [
+    "Which reference is the definitive formulation of the passivity theorem for QFT vacuum states?",
+    "What is the correct energy accounting for the dynamic Casimir effect \u2014 is photon production from vacuum genuinely 'extraction'?",
+    "Whether topology changes (creating/removing a cavity) constitute a distinct loophole or reduce to boundary condition changes"
+  ],
+  "performance_metrics": {
+    "rows": []
+  },
+  "decisions": [],
+  "approximations": [],
+  "convention_lock": {
+    "metric_signature": null,
+    "fourier_convention": null,
+    "natural_units": null,
+    "gauge_choice": null,
+    "regularization_scheme": null,
+    "renormalization_scheme": null,
+    "coordinate_system": null,
+    "spin_basis": null,
+    "state_normalization": null,
+    "coupling_convention": null,
+    "index_positioning": null,
+    "time_ordering": null,
+    "commutation_convention": null,
+    "levi_civita_sign": null,
+    "generator_normalization": null,
+    "covariant_derivative_sign": null,
+    "gamma_matrix_convention": null,
+    "creation_annihilation_order": null,
+    "custom_conventions": {}
+  },
+  "propagated_uncertainties": [],
+  "pending_todos": [],
+  "blockers": [],
+  "session": {
+    "last_date": null,
+    "stopped_at": null,
+    "resume_file": null
+  }
+}
