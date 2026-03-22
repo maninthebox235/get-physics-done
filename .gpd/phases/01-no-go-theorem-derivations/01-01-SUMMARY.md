@@ -40,7 +40,7 @@ key-files:
     - derivations/nogo-thermodynamic.md
     - derivations/nogo-lorentz.md
     - derivations/nogo-passivity.md
-    - derivations/nogo-verification.md
+    - derivations/nogo-cross-verification.md
 
 key-decisions:
   - "Used elementary proof of ground state passivity rather than full C*-algebraic Pusz-Woronowicz proof — sufficient for the claim and more transparent"
@@ -153,15 +153,15 @@ Each task was committed atomically:
 
 1. **Task 1: Thermodynamic no-go argument** - `f827b48` (derive) — previously committed
 2. **Task 2: Lorentz invariance no-go argument** - `c363257` (derive)
-3. **Task 3: Passivity no-go argument (Pusz-Woronowicz)** - `42e6378` (derive)
-4. **Task 4: Cross-verification** - `a3d5a86` (validate)
+3. **Task 3: Passivity no-go argument (Pusz-Woronowicz)** - `f4d1ee2` (derive)
+4. **Task 4: Cross-verification** - `bb87511` (validate)
 
 ## Files Created/Modified
 
 - `derivations/nogo-thermodynamic.md` — Argument A: conservative force + second law
 - `derivations/nogo-lorentz.md` — Argument B: Poincaré invariance → p = -ρ
 - `derivations/nogo-passivity.md` — Argument C: ground state passivity
-- `derivations/nogo-verification.md` — Cross-verification of all three arguments
+- `derivations/nogo-cross-verification.md` — Cross-verification of all three arguments
 
 ## Next Phase Readiness
 
@@ -219,6 +219,20 @@ None — plan executed exactly as written.
 
 - Can the time-dependent H gap in Argument C be closed by a generalized passivity result? (Relevant to Phase 06)
 - The Casimir cavity stress tensor Eq. (B.17) shows anisotropy — does this anisotropy enable any cycle that the isotropic free-vacuum cannot support? (Relevant to Phase 05)
+
+## Self-Check: PASSED
+
+- [x] derivations/nogo-thermodynamic.md exists
+- [x] derivations/nogo-lorentz.md exists
+- [x] derivations/nogo-passivity.md exists
+- [x] derivations/nogo-cross-verification.md exists
+- [x] Commit f827b48 exists (Task 1)
+- [x] Commit c363257 exists (Task 2)
+- [x] Commit f4d1ee2 exists (Task 3)
+- [x] Commit bb87511 exists (Task 4)
+- [x] All equations dimensionally consistent
+- [x] All derivations use identical convention assertions
+- [x] Forbidden proxies rejected (no citation-only, no attractive-force-as-evidence)
 
 ---
 
