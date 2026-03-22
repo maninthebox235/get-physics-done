@@ -1,0 +1,408 @@
+% Conservative Force Proof for the Casimir Interaction
+%
+% ASSERT_CONVENTION: natural_units=natural, metric_signature=mostly_minus,
+%   fourier_convention=physics, regularization_scheme=zeta
+% ASSERT_CONVENTION: casimir_force_sign=F < 0 for attractive
+% ASSERT_CONVENTION: casimir_energy_sign=E < 0 for bound configuration
+% ASSERT_CONVENTION: work_sign=W_net > 0 means extraction; no-go claim: W_net <= 0
+% ASSERT_CONVENTION: [F/A] = length^{-4}, [E/A] = length^{-3}, [W/A] = length^{-3}
+%
+% Reference: H.B.G. Casimir, Proc. K. Ned. Akad. Wet. 51, 793 (1948)
+%   E/A = -pi^2/(720 a^3), F/A = -pi^2/(240 a^4) for ideal parallel plates at T=0
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+\title{Conservative Nature of the Casimir Force\\and Vanishing Net Work in Quasi-Static Cycles}
+\author{GPD Research Project --- Phase 03, Plan 01}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\section{Conventions and Definitions}
+%% ============================================================
+
+Throughout, we work in natural units $\hbar = c = k_B = 1$.
+All quantities are per unit plate area $A$ unless otherwise noted.
+The metric signature is $(+,-,-,-)$.
+
+\begin{definition}[Sign conventions]
+\begin{itemize}
+  \item \textbf{Force:} $F < 0$ for attractive (plates pulled together).
+  \item \textbf{Energy:} $E < 0$ for a bound configuration (energy lower than infinite separation).
+  \item \textbf{Work:} $W > 0$ when the Casimir force does positive work on the plates
+    (energy is transferred \emph{from} the vacuum field to the mechanical degree of freedom).
+    $W_\mathrm{net} > 0$ would mean net energy extraction over a cycle.
+    The no-go claim is $W_\mathrm{net} \le 0$.
+\end{itemize}
+\end{definition}
+
+%% ============================================================
+\section{Theorem: The Casimir Force is Conservative}
+%% ============================================================
+
+\begin{theorem}[Conservative Casimir force]
+\label{thm:conservative}
+For parallel plates with fixed dielectric response functions
+$\varepsilon(\omega)$ and $\mu(\omega)$, the Casimir force
+\begin{equation}
+  F(a,T) = -\frac{\partial V(a,T)}{\partial a}
+  \label{eq:force-potential}
+\end{equation}
+derives from a single-valued potential $V(a,T)$, where:
+\begin{itemize}
+  \item At $T = 0$: $V(a) \equiv E_\mathrm{vac}(a)$, the vacuum energy.
+  \item At $T > 0$: $V(a,T) \equiv \mathcal{F}(a,T) = -T \ln Z(a,T)$,
+    the Helmholtz free energy.
+\end{itemize}
+The force $F$ is therefore conservative under conditions A1--A4 (below),
+and the work done over any closed path in configuration space vanishes:
+\begin{equation}
+  W_\mathrm{net} = \oint F(a)\, da = 0.
+  \label{eq:cycle-vanish}
+\end{equation}
+\end{theorem}
+
+%% ============================================================
+\section{Conditions for Conservativeness (A1--A4)}
+%% ============================================================
+
+The force $F = -\partial V / \partial a$ is conservative if and only if
+the potential $V$ is a single-valued function of the configuration.
+This holds under the following conditions:
+
+\begin{description}
+  \item[A1 --- Fixed material response:]
+    The dielectric function $\varepsilon(\omega)$ and magnetic
+    permeability $\mu(\omega)$ are \emph{independent of plate separation}
+    and remain unchanged during the cycle. This ensures $V$ depends on $a$
+    (and $T$) only through the mode structure, not through a hidden
+    dependence on material state.
+
+  \item[A2 --- Quasi-static process:]
+    The system is in thermal equilibrium (or the vacuum state, at $T=0$)
+    at every intermediate step. The plate velocity satisfies $v \ll c$,
+    so no dynamical Casimir photons are produced. The force at each $a$
+    is the equilibrium force $F(a,T)$.
+
+  \item[A3 --- Isothermal process:]
+    The temperature $T$ is held fixed throughout the cycle, OR the
+    material response $\varepsilon(\omega)$, $\mu(\omega)$ is
+    $T$-independent so that temperature variations do not alter the
+    force law. For an isothermal process, $V(a,T) = \mathcal{F}(a,T)$
+    is the appropriate potential.
+
+  \item[A4 --- Fixed geometry class:]
+    The plates remain parallel throughout the cycle. No topology change
+    (e.g., merging plates, creating/destroying a cavity) occurs.
+    The configuration space is $a \in (0, \infty)$, a simply-connected
+    one-dimensional manifold, on which any single-valued $V(a)$ is
+    automatically conservative.
+\end{description}
+
+%% ============================================================
+\section{Proof}
+%% ============================================================
+
+\subsection{Case 1: $T = 0$ (vacuum energy)}
+
+At $T = 0$, the Casimir energy is given by the regularized vacuum energy
+of the electromagnetic field between the plates.
+For ideal perfectly conducting plates (Casimir 1948):
+\begin{equation}
+  \frac{E(a)}{A} = -\frac{\pi^2}{720\, a^3}.
+  \label{eq:casimir-energy}
+\end{equation}
+
+% DIMENSION CHECK: [E/A] = [a^{-3}] = [length^{-3}]. CHECK.
+
+The function $E(a)$ depends on $a$ only (no other dynamical variable
+for fixed plate material at $T=0$).
+It is manifestly single-valued on $(0,\infty)$.
+
+The force per unit area is:
+\begin{equation}
+  \frac{F(a)}{A} = -\frac{d}{da}\frac{E(a)}{A}
+  = -\frac{\pi^2}{720}\cdot(-3)\cdot a^{-4}
+  = -\frac{\pi^2}{240\, a^4}.
+  \label{eq:casimir-force}
+\end{equation}
+
+% SIGN CHECK: d/da(a^{-3}) = -3 a^{-4}. Minus sign from F = -dE/da
+% gives F = -(-3)(-pi^2/720) a^{-4} = -(3 pi^2/720) a^{-4} = -pi^2/(240 a^4).
+% F < 0: attractive. CHECK.
+%
+% DIMENSION CHECK: [F/A] = [a^{-4}] = [length^{-4}]. CHECK.
+
+Since $V(a) = E(a)$ is single-valued and $F = -dV/da$, the force is
+conservative. \qed
+
+\subsection{Case 2: $T > 0$ (Helmholtz free energy)}
+
+At finite temperature $T > 0$, the thermal equilibrium state of the
+field-plus-plates system is described by the partition function $Z(a,T)$.
+The Helmholtz free energy
+\begin{equation}
+  \mathcal{F}(a,T) = -T \ln Z(a,T)
+  \label{eq:helmholtz}
+\end{equation}
+is a \emph{state function}: it depends on the thermodynamic state
+$(a, T)$ only, not on the path by which the state was reached.
+
+Under conditions A1--A4:
+\begin{itemize}
+  \item $Z(a,T)$ is a function of $(a,T)$ only (no hidden variables),
+    because the Hamiltonian depends on $a$ through the boundary conditions
+    and the material response functions are fixed (A1).
+  \item $\mathcal{F}$ is single-valued on the configuration space.
+  \item The force $F = -\partial \mathcal{F}/\partial a |_T$ is therefore
+    the gradient of a state function at fixed $T$, hence conservative.
+\end{itemize}
+
+The Lifshitz formula gives the force explicitly:
+\begin{equation}
+  \frac{F(a,T)}{A} = -\frac{T}{\pi}\,
+  \sideset{}{'}\sum_{l=0}^{\infty}\;
+  \int_0^\infty dk_\perp\, k_\perp\, \kappa_0 \,
+  \sum_{P=\mathrm{TE,TM}}
+  \frac{r_P^2\, e^{-2\kappa_0 a}}{1 - r_P^2\, e^{-2\kappa_0 a}}
+  \label{eq:lifshitz-force}
+\end{equation}
+where $\xi_l = 2\pi l T$ are the Matsubara frequencies,
+$\kappa_0 = \sqrt{k_\perp^2 + \xi_l^2}$, and $r_P$ are the
+Fresnel reflection coefficients at imaginary frequency.
+This is manifestly a function of $(a, T)$ only (for fixed
+$\varepsilon(\omega)$, $\mu(\omega)$), confirming single-valuedness of
+the underlying potential $\mathcal{F}(a,T)$.
+
+Under an isothermal quasi-static process (A2, A3), the relevant
+thermodynamic potential is $\mathcal{F}(a,T)$, and the force is its
+gradient. \qed
+
+%% ============================================================
+\section{Corollary: Vanishing Cycle Work}
+%% ============================================================
+
+\begin{corollary}[Zero net work in closed cycle]
+\label{cor:vanishing-work}
+For any closed quasi-static isothermal path $a_1 \to a_2 \to a_1$
+satisfying conditions A1--A4:
+\begin{equation}
+  W_\mathrm{net} = \oint F(a)\, da
+  = \int_{a_1}^{a_2} F(a)\, da + \int_{a_2}^{a_1} F(a)\, da = 0.
+  \label{eq:wnet-zero}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Since $F = -dV/da$ for a single-valued potential $V(a)$:
+\[
+  \int_{a_1}^{a_2} F(a)\,da
+  = -\int_{a_1}^{a_2} \frac{dV}{da}\, da
+  = -(V(a_2) - V(a_1))
+  = V(a_1) - V(a_2).
+\]
+Similarly, $\int_{a_2}^{a_1} F(a)\, da = V(a_2) - V(a_1)$.
+Adding: $W_\mathrm{net} = 0$. \qed
+\end{proof}
+
+This result is exact: it follows from the existence of a potential,
+not from any approximation. It holds for ideal plates at $T=0$,
+for realistic materials at finite $T$, and for \emph{any} cycle
+geometry $a_\mathrm{min} \to a_\mathrm{max} \to a_\mathrm{min}$,
+provided A1--A4 are satisfied.
+
+%% ============================================================
+\section{Analytical $T = 0$ Ideal-Plate Cycle}
+%% ============================================================
+
+\subsection{Setup}
+
+Consider a cycle between $a_\mathrm{min}$ and $a_\mathrm{max}$
+($0 < a_\mathrm{min} < a_\mathrm{max} < \infty$)
+with ideal parallel plates at $T = 0$.
+
+The potential (per unit area) is:
+\begin{equation}
+  V(a) = \frac{E(a)}{A} = -\frac{\pi^2}{720\, a^3}.
+  \label{eq:potential}
+\end{equation}
+
+\subsection{Closing work ($a_\mathrm{max} \to a_\mathrm{min}$)}
+
+The work done by the Casimir force during plate closing:
+\begin{align}
+  \frac{W_\mathrm{close}}{A}
+  &= \int_{a_\mathrm{max}}^{a_\mathrm{min}} \frac{F(a)}{A}\, da
+  = -\int_{a_\mathrm{max}}^{a_\mathrm{min}} \frac{dV}{da}\, da
+  \nonumber \\
+  &= -(V(a_\mathrm{min}) - V(a_\mathrm{max}))
+  = V(a_\mathrm{max}) - V(a_\mathrm{min})
+  \nonumber \\
+  &= -\frac{\pi^2}{720}\left(\frac{1}{a_\mathrm{max}^3}
+     - \frac{1}{a_\mathrm{min}^3}\right).
+  \label{eq:wclose}
+\end{align}
+
+% SIGN CHECK: For a_min < a_max, 1/a_min^3 > 1/a_max^3,
+% so (1/a_max^3 - 1/a_min^3) < 0,
+% so W_close = -pi^2/720 * (negative) > 0.
+% W_close > 0: the attractive force does positive work as plates close. CHECK.
+%
+% DIMENSION CHECK: [W/A] = [a^{-3}] = [length^{-3}]. CHECK.
+
+\subsection{Opening work ($a_\mathrm{min} \to a_\mathrm{max}$)}
+
+The work done by the Casimir force during plate opening:
+\begin{align}
+  \frac{W_\mathrm{open}}{A}
+  &= \int_{a_\mathrm{min}}^{a_\mathrm{max}} \frac{F(a)}{A}\, da
+  = V(a_\mathrm{min}) - V(a_\mathrm{max})
+  \nonumber \\
+  &= -\frac{\pi^2}{720}\left(\frac{1}{a_\mathrm{min}^3}
+     - \frac{1}{a_\mathrm{max}^3}\right)
+  = -\frac{W_\mathrm{close}}{A}.
+  \label{eq:wopen}
+\end{align}
+
+% SIGN CHECK: W_open = -W_close < 0. The attractive force opposes
+% opening, so the Casimir force does negative work (external agent
+% must input energy). CHECK.
+
+\subsection{Net cycle work}
+
+\begin{equation}
+  \boxed{
+    \frac{W_\mathrm{net}}{A}
+    = \frac{W_\mathrm{close}}{A} + \frac{W_\mathrm{open}}{A}
+    = 0 \quad \text{(exact)}.
+  }
+  \label{eq:wnet}
+\end{equation}
+
+This is an exact algebraic cancellation, not a numerical coincidence.
+It follows directly from $W_\mathrm{open} = -W_\mathrm{close}$,
+which is a consequence of the force being conservative.
+
+\subsection{Explicit numerical values}
+
+For the canonical test cycle $a_\mathrm{min} = 100\,\mathrm{nm}$,
+$a_\mathrm{max} = 1\,\mu\mathrm{m}$:
+
+In natural units, the Casimir formulas $E/A = -\pi^2/(720\,a^3)$
+and $F/A = -\pi^2/(240\,a^4)$ take $a$ in units of length.
+Since we work with pure numbers (the code uses $a$ directly
+in the formula), we can evaluate for any $a > 0$ with the
+understanding that $a$ is measured in whatever length unit
+we choose consistently.
+
+Choosing $a$ in nanometers as the working unit:
+\begin{align}
+  a_\mathrm{min} &= 100, \quad a_\mathrm{max} = 1000 \quad
+  \text{(in nm)} \\[6pt]
+  \frac{W_\mathrm{close}}{A}
+  &= -\frac{\pi^2}{720}\left(\frac{1}{1000^3} - \frac{1}{100^3}\right)
+  \nonumber \\
+  &= -\frac{\pi^2}{720}\left(10^{-9} - 10^{-6}\right)
+  = -\frac{\pi^2}{720}\cdot(-999 \times 10^{-9})
+  \nonumber \\
+  &= +\frac{999\,\pi^2}{720 \times 10^9}
+  \approx 1.369 \times 10^{-8} \quad [\text{nm}^{-3}].
+  \label{eq:wclose-numerical}
+\end{align}
+
+% CROSS-CHECK: W_close > 0. CHECK.
+% LIMITING CASE 1: a_min = a_max => W_close = 0. CHECK.
+% LIMITING CASE 2: a_max -> infinity => W_close = pi^2/(720 a_min^3)
+%   = -E(a_min)/A. This is all the stored vacuum energy being released. CHECK.
+
+\subsection{Limiting cases}
+
+\begin{enumerate}
+  \item \textbf{Trivial cycle} ($a_\mathrm{min} = a_\mathrm{max}$):
+    $W_\mathrm{close} = W_\mathrm{open} = W_\mathrm{net} = 0$. \checkmark
+
+  \item \textbf{Infinite separation}
+    ($a_\mathrm{max} \to \infty$):
+    $W_\mathrm{close} \to -E(a_\mathrm{min})/A = \pi^2/(720\,a_\mathrm{min}^3)$.
+    This is the total stored vacuum energy, confirming that bringing
+    plates from infinity releases all the Casimir binding energy.
+    $W_\mathrm{open} = -W_\mathrm{close}$: it costs exactly as much
+    to separate the plates back to infinity. \checkmark
+
+  \item \textbf{Small cycle}
+    ($a_\mathrm{max} = a_\mathrm{min} + \delta$, $\delta \ll a_\mathrm{min}$):
+    \begin{align}
+      W_\mathrm{close} &\approx -F(a_\mathrm{min})\cdot\delta
+      = \frac{\pi^2}{240\,a_\mathrm{min}^4}\,\delta > 0.
+    \end{align}
+    This is just ``force $\times$ displacement'' for an infinitesimal
+    cycle, confirming consistency with the force definition. \checkmark
+\end{enumerate}
+
+%% ============================================================
+\section{What Breaks Conservativeness}
+%% ============================================================
+
+The conservativeness of the Casimir force fails when any of
+A1--A4 is violated:
+
+\begin{enumerate}
+  \item \textbf{Violation of A1} (material response changes during cycle):
+    If $\varepsilon(\omega)$ changes between the closing and opening
+    legs (e.g., via an external field or phase transition), then
+    $F_\mathrm{close}(a) \neq F_\mathrm{open}(a)$, and the cycle
+    integral need not vanish. This is the \emph{boundary condition
+    change loophole} analyzed in Phase 05.
+
+  \item \textbf{Violation of A2} (non-quasi-static, dynamic Casimir):
+    If plates move at relativistic speeds, real photons are created
+    (dynamic Casimir effect). The system is no longer in the
+    equilibrium state at each $a$, and the equilibrium force law
+    does not apply. Analyzed in Phase 06.
+
+  \item \textbf{Violation of A3} (non-isothermal with $T$-dependent
+    material response): If $T$ changes and $\varepsilon(\omega,T)$
+    changes accordingly, the effective force law varies along the
+    cycle. Proper treatment requires tracking entropy and heat flows.
+
+  \item \textbf{Violation of A4} (topology change):
+    Creating or destroying a cavity (e.g., merging two plates into
+    one or introducing a third plate) changes the topology of the
+    configuration space. The potential $V(a)$ on the old space is
+    no longer the relevant quantity. Analyzed in Phase 05.
+\end{enumerate}
+
+%% ============================================================
+\section{Energy Budget for a Closed $T=0$ Cycle}
+%% ============================================================
+
+For a closed isothermal cycle at $T = 0$ with conditions A1--A4:
+
+\begin{center}
+\begin{tabular}{l c c}
+\hline
+Quantity & Symbol & Value \\
+\hline
+Vacuum energy change & $\Delta E_\mathrm{vac}$ & $0$ (closed cycle) \\
+Work by Casimir force (closing) & $W_\mathrm{close}$ & $>0$ \\
+Work by Casimir force (opening) & $W_\mathrm{open}$ & $-W_\mathrm{close} < 0$ \\
+Net work & $W_\mathrm{net}$ & $0$ (exact) \\
+Heat exchanged & $Q$ & $0$ ($T = 0$) \\
+\hline
+Energy conservation & \multicolumn{2}{c}{$W_\mathrm{net} = \Delta E_\mathrm{vac} + Q = 0$} \\
+\hline
+\end{tabular}
+\end{center}
+
+The energy budget closes exactly. No net energy is extracted from
+the vacuum over a complete cycle.
+
+\end{document}
