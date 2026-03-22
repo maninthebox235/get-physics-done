@@ -358,7 +358,11 @@ def lifshitz_force_T0(a, epsilon_func=None, material_type='perfect'):
                     continue
                 total += r2 * exp_factor / (1.0 - r2 * exp_factor)
 
-            return (u / a) * (kappa_0) * total / a  # Jacobian: 1/a^2
+            # Jacobian: dk_perp * dxi = du * dv / a^2
+            # k_perp = u/a contributes one factor of 1/a
+            # kappa_0 is in physical units (1/length), no extra factor
+            # So: (u/a) * kappa_0 * total * (1/a^2) from Jacobian
+            return (u / a) * kappa_0 * total / a**2
 
         result, error = integrate.dblquad(
             integrand_v,
