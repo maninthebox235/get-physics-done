@@ -2,87 +2,74 @@
 
 ## Project Reference
 
-See: .gpd/PROJECT.md
+See: .gpd/PROJECT.md (updated 2026-03-21)
 
 **Core research question:** Can zero-point energy of the quantum vacuum be extracted as usable work through cyclic processes involving boundary condition changes?
-**Current focus:** Phase 02 complete; ready for Phase 03
+**Current focus:** Phase 01 -- No-Go Theorem Derivations
 
 ## Current Position
 
-**Current Phase:** 02 (complete)
-**Current Phase Name:** Casimir Force Computation Framework
+**Current Phase:** 01
+**Current Phase Name:** No-Go Theorem Derivations
 **Total Phases:** 7
-**Current Plan:** 3/3 complete
-**Total Plans in Phase:** 3
-**Status:** Phase complete ✓
-**Last Activity:** Phase 02 execution — all plans passed verification (5/5 contract targets, 23/23 tests)
+**Current Plan:** —
+**Total Plans in Phase:** —
+**Status:** ready_to_plan
+**Last Activity:** 2026-03-21
+**Last Activity Description:** Project initialization complete; roadmap created with 7 phases
 
-**Progress:** [██░░░░░░░░] 29%
+**Progress:** [░░░░░░░░░░] 0%
 
 ## Active Calculations
 
-None (all Phase 02 code validated and tested).
+None yet.
 
 ## Intermediate Results
 
-### Phase 01 (No-Go Theorems)
-
-- **Thermodynamic no-go:** W_net ≤ 0 for cyclic processes at equilibrium with conservative Casimir force (assumptions A1-A5)
-- **Lorentz invariance no-go:** ⟨0|T^μν|0⟩ = ρ_vac g^μν — uniform vacuum energy, no extractable gradient (assumptions B1-B4); boundaries break B2
-- **Passivity no-go:** Ground state passive under cyclic unitaries for fixed H: ⟨ψ₀|U†HU|ψ₀⟩ ≥ E₀ (assumptions C1-C5); time-dependent H evades C1
-- **Logical hierarchy:** Passivity (C) ⇒ Thermodynamic (A) ← Lorentz (B)
-
-### Phase 02 (Casimir Force Computation)
-
-- **Ideal Casimir force:** F/A = -π²/(240a⁴) verified by 3 independent methods (analytical, zeta-regularized, Abel-Plana) to relative error < 10⁻¹⁶
-- **Lifshitz formula:** Implemented with Drude and plasma material models, Matsubara summation, TE/TM reflection coefficients
-- **T=0 perfect conductor via Lifshitz:** Matches ideal result to 1.87e-13 relative error
-- **Drude gold T=300K:** η = F_Drude/F_ideal ranges from 0.43 (100nm) to 0.79 (5μm)
-- **Drude-plasma discrepancy:** 2.1% at 100nm growing to 94% at 5μm (l=0 TE mode)
-- **Limiting cases:** All 5 verified (T→0, a→∞, ε→∞, γ→0, high-T classical)
-- **High-T classical:** -Tζ(3)/(4πa³) for perfect conductor; -Tζ(3)/(8πa³) for Drude (TM only)
-- **Bug fixed:** Jacobian in lifshitz_force_T0 material branch corrected
+None yet.
 
 ## Open Questions
 
 - Which reference is the definitive formulation of the passivity theorem for QFT vacuum states?
 - What is the correct energy accounting for the dynamic Casimir effect — is photon production from vacuum genuinely 'extraction'?
 - Whether topology changes (creating/removing a cavity) constitute a distinct loophole or reduce to boundary condition changes
-- Exact scope of Pusz-Woronowicz passivity in QFT with boundaries (open mathematical question)
 
 ## Performance Metrics
 
 | Label | Duration | Tasks | Files |
 | ----- | -------- | ----- | ----- |
-| Phase 01, Plan 01 | ~20 min | 4 | 4 |
-| Phase 01, Plan 02 | ~15 min | 3 | 2 |
-| Phase 02, Plan 01 | ~6 min | 2 | 4 |
-| Phase 02, Plan 02 | ~15 min | 2 | 5 |
-| Phase 02, Plan 03 | ~13 min | 2 | 4 |
+| -     | -        | -     | -     |
 
 ## Accumulated Context
 
 ### Decisions
 
-- Used elementary proof of ground state passivity rather than full C*-algebraic Pusz-Woronowicz proof
-- Used Weinberg QFT Vol 1 §11.2 approach for Lorentz invariance argument
-- Extended comparison table from 5 to 7 columns for richer traceability
-- Used Abel-Plana formula instead of exponential regulator for numerical cross-check (better stability)
-- l=0 reflection coefficients as separate special-case functions (avoids 0/0 indeterminate)
-- High-T classical limit: -Tζ(3)/(4πa³) for perfect conductor, -Tζ(3)/(8πa³) for Drude
+None yet.
 
 ### Active Approximations
 
-- Drude model: ε_D(iξ) = 1 + ω_p²/(ξ(ξ+γ)) — valid for metals with dissipation below interband transitions
-- Plasma model: ε_P(iξ) = 1 + ω_p²/ξ² — dissipationless limit
-- Matsubara truncation: l_max such that |f(l_max)| < 10⁻¹² |f(0)| — exponential convergence at finite T
+None yet.
 
 **Convention Lock:**
 
 - Metric signature: mostly-minus
 - Fourier convention: physics
 - Natural units: natural
+- Gauge choice: N/A
 - Regularization scheme: zeta
+- Renormalization scheme: N/A
+- Coordinate system: N/A
+- Spin basis: N/A
+- State normalization: N/A
+- Coupling convention: N/A
+- Index positioning: N/A
+- Time ordering: N/A
+- Commutation convention: N/A
+- Levi-Civita sign: N/A
+- Generator normalization: N/A
+- Covariant derivative sign: N/A
+- Gamma matrix convention: N/A
+- Creation/annihilation order: N/A
 
 *Custom conventions:*
 - Casimir Force Sign: F < 0 for attractive (plates pulled together)
@@ -104,6 +91,6 @@ None
 
 ## Session Continuity
 
-**Last session:** 2026-03-22
-**Stopped at:** Phase 02 complete, ready for Phase 03
-**Resume file:** .gpd/phases/02-casimir-force-computation-framework/02-VERIFICATION.md
+**Last session:** —
+**Stopped at:** —
+**Resume file:** —
