@@ -50,6 +50,7 @@ temperature_to_natural = _cl.temperature_to_natural
 cycle_work_ideal_analytical = _cc.cycle_work_ideal_analytical
 cycle_work_ideal_numerical = _cc.cycle_work_ideal_numerical
 cycle_work_lifshitz = _cc.cycle_work_lifshitz
+cycle_work_lifshitz_double_integral = _cc.cycle_work_lifshitz_double_integral
 energy_budget = _cc.energy_budget
 
 
@@ -245,3 +246,64 @@ class TestMonotonicity:
 
         assert abs(r_wide['W_close']) > abs(r_narrow['W_close']), \
             f"Wide |W_close|={abs(r_wide['W_close']):.4e} not > narrow |W_close|={abs(r_narrow['W_close']):.4e}"
+
+
+# ===========================================================================
+# Independent double-integration W_net test (closes verification gap)
+# ===========================================================================
+
+class TestDoubleIntegrationWnet:
+    """
+    Verify W_net = 0 by computing W_close and W_open as TWO independent
+    integrals, not by setting W_open = -W_close algebraically.
+
+    This closes the verification gap identified by the phase verifier:
+    cycle_work_lifshitz makes W_net = 0 by construction, so the standard
+    test is tautological. This test uses cycle_work_lifshitz_double_integral
+    which integrates twice independently.
+    """
+
+    @pytest.mark.parametrize("material_type,epsilon_func,omega_p,gamma,T,label", [
+        ('drude', EPS_DRUDE, GOLD_OMEGA_P, GOLD_GAMMA, T_300K, "Drude Au T=300K"),
+        ('plasma', EPS_PLASMA, GOLD_OMEGA_P, None, T_300K, "Plasma Au T=300K"),
+    ])
+    def test_double_integral_wnet_zero(self, material_type, epsilon_func,
+                                        omega_p, gamma, T, label):
+        """W_net from two independent integrals is < 10^{-10} |W_close|."""
+        a_min = 100e-9 * 5.068e6   # 100 nm in natural units
+        a_max = 1e-6 * 5.068e6     # 1 um in natural units
+
+        result = cycle_work_lifshitz_double_integral(
+            a_min, a_max, T, epsilon_func,
+            material_type=material_type,
+            omega_p=omega_p, gamma=gamma,
+            epsrel=1e-12,
+        )
+
+        W_close = result['W_close']
+        W_net = result['W_net']
+
+        assert W_close > 0, f"{label}: W_close should be positive, got {W_close}"
+
+        if abs(W_close) > 0:
+            ratio = abs(W_net) / abs(W_close)
+            assert ratio < 1e-10, \
+                f"{label}: |W_net|/|W_close| = {ratio:.2e} exceeds 1e-10"
+
+    def test_double_integral_matches_single(self):
+        """Double-integral W_close matches single-integral W_close."""
+        a_min = 100e-9 * 5.068e6
+        a_max = 1e-6 * 5.068e6
+
+        r_single = cycle_work_lifshitz(
+            a_min, a_max, T_300K, EPS_DRUDE,
+            material_type='drude', omega_p=GOLD_OMEGA_P, gamma=GOLD_GAMMA,
+        )
+        r_double = cycle_work_lifshitz_double_integral(
+            a_min, a_max, T_300K, EPS_DRUDE,
+            material_type='drude', omega_p=GOLD_OMEGA_P, gamma=GOLD_GAMMA,
+        )
+
+        rel_err = abs(r_single['W_close'] - r_double['W_close']) / abs(r_single['W_close'])
+        assert rel_err < 1e-10, \
+            f"Single vs double W_close mismatch: rel_err = {rel_err:.2e}"
