@@ -134,12 +134,12 @@ Plans:
 
 **Backtracking trigger:** If energy conservation check fails at > 10^{-8}, indicates numerical error in Phase 02 code -- return and fix
 
-**Plans:** TBD
+**Plans:** 2 plans
 
 Plans:
 
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md -- Conservative force proof + T=0 cycle (analytical + numerical W_net = 0)
+- [ ] 03-02-PLAN.md -- Finite-T energy budget: 6 configurations (ideal/Drude/plasma), energy conservation verification
 
 ### Phase 04: W_net Parameter Sweep
 
