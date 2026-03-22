@@ -40,7 +40,7 @@ This project investigates whether zero-point energy of the quantum vacuum can be
 
 **Milestone 1: Feasibility Analysis**
 
-- [ ] **Phase 01: No-Go Theorem Derivations** - Derive three independent no-go arguments with explicit numbered assumptions and comparison table
+- [x] **Phase 01: No-Go Theorem Derivations** - Derive three independent no-go arguments with explicit numbered assumptions and comparison table
 - [ ] **Phase 02: Casimir Force Computation Framework** - Implement and benchmark Casimir force for ideal plates (T=0) and realistic materials (Lifshitz, Drude/plasma)
 - [ ] **Phase 03: Conservative Force Proof and Cycle Analysis** - Prove Casimir force is conservative for fixed materials; compute complete energy budget for quasi-static cycles
 - [ ] **Phase 04: W_net Parameter Sweep** - Sweep W_net over (a_min, a_max, T) parameter space; confirm W_net=0 across full range
@@ -82,8 +82,8 @@ This project investigates whether zero-point energy of the quantum vacuum can be
 
 Plans:
 
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [x] 01-01: Three no-go theorem derivations + cross-verification
+- [x] 01-02: Comparison table + consistency analysis + strength assessment
 
 ### Phase 02: Casimir Force Computation Framework
 
@@ -296,7 +296,7 @@ Phases execute in numeric order: 01 -> 02 -> 03 -> (04, 05, 06 parallel where po
 
 | Phase | Plans Complete | Status | Completed |
 | --- | --- | --- | --- |
-| 01. No-Go Theorem Derivations | 0/TBD | Not started | - |
+| 01. No-Go Theorem Derivations | 2/2 | Complete ✓ | 2026-03-22 |
 | 02. Casimir Force Computation | 0/TBD | Not started | - |
 | 03. Conservative Force Proof | 0/TBD | Not started | - |
 | 04. W_net Parameter Sweep | 0/TBD | Not started | - |
