@@ -195,6 +195,8 @@ def matsubara_term(l, a, T, epsilon_func, material_type='drude',
 
     if is_l0:
         epsilon_val = np.inf  # not used directly; l=0 special functions handle it
+    elif material_type == 'perfect':
+        epsilon_val = 1e30  # Perfect conductor: epsilon -> infinity at all frequencies
     else:
         epsilon_val = epsilon_func(np.array([xi_l]))[0]
 

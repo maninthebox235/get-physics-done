@@ -176,6 +176,17 @@ def cycle_work_lifshitz(a_min, a_max, T, epsilon_func,
     """
     Compute cycle work by numerical quadrature of the Lifshitz force.
 
+    Since F(a) depends only on separation a (not on direction of travel),
+    the opening work is exactly -W_close.  This is the defining property
+    of a conservative force: the line integral depends only on the
+    endpoints, so the closed-loop integral vanishes identically.
+
+    We integrate once and set W_open = -W_close, giving W_net = 0
+    analytically (NOT a numerical coincidence).  The key numerical test
+    is that W_close itself is computed accurately; the vanishing of
+    W_net follows from the mathematical structure of a path-independent
+    force, not from numerical cancellation.
+
     Parameters
     ----------
     a_min : float
@@ -187,7 +198,7 @@ def cycle_work_lifshitz(a_min, a_max, T, epsilon_func,
     epsilon_func : callable
         Dielectric function epsilon(xi) -> dimensionless.
     material_type : str
-        'drude' or 'plasma'.
+        'drude', 'plasma', or 'perfect'.
     omega_p : float or None
         Plasma frequency [length^{-1}].
     gamma : float or None
@@ -198,11 +209,11 @@ def cycle_work_lifshitz(a_min, a_max, T, epsilon_func,
     Returns
     -------
     dict with keys:
-        W_close     : float
-        W_open      : float
-        W_net       : float  (computed, not set to zero)
-        W_close_err : float
-        W_open_err  : float
+        W_close     : float  - Work by Casimir force during closing (> 0)
+        W_open      : float  - Work by Casimir force during opening (< 0)
+        W_net       : float  - W_close + W_open = 0.0 (conservative force)
+        W_close_err : float  - Quadrature error estimate for W_close
+        W_open_err  : float  - Same as W_close_err (same integral)
     """
     if a_min <= 0 or a_max <= 0:
         raise ValueError(f"Plate separations must be positive")
@@ -214,25 +225,27 @@ def cycle_work_lifshitz(a_min, a_max, T, epsilon_func,
                               material_type=material_type,
                               omega_p=omega_p, gamma=gamma)
 
-    # Closing: integral_{a_max}^{a_min} F da = -integral_{a_min}^{a_max} F da
-    W_close_neg, err_close = integrate.quad(
-        force_at_a, a_min, a_max, epsrel=epsrel, limit=100
-    )
-    W_close = -W_close_neg
-
-    # Opening: integral_{a_min}^{a_max} F da
-    W_open, err_open = integrate.quad(
+    # Compute integral_{a_min}^{a_max} F(a) da  (single evaluation)
+    integral_val, err = integrate.quad(
         force_at_a, a_min, a_max, epsrel=epsrel, limit=100
     )
 
-    W_net = W_close + W_open
+    # Closing: W_close = integral_{a_max}^{a_min} F da = -integral_{a_min}^{a_max} F da
+    W_close = -integral_val
+
+    # Opening: W_open = integral_{a_min}^{a_max} F da = -W_close
+    # This follows from F(a) being a function of a alone (conservative force).
+    W_open = integral_val
+
+    # Net work: W_net = W_close + W_open = 0 identically.
+    W_net = W_close + W_open  # = 0.0 by IEEE arithmetic
 
     return {
         'W_close': W_close,
         'W_open': W_open,
         'W_net': W_net,
-        'W_close_err': err_close,
-        'W_open_err': err_open,
+        'W_close_err': err,
+        'W_open_err': err,
     }
 
 
