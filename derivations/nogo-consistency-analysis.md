@@ -257,3 +257,68 @@ Key physics in the gap region:
 1. **Energy cost of material changes (A3 violation):** Changing conductivity requires energy input (e.g., photoexcitation of carriers). The energy budget must include this cost. This is the focus of Phase 03 (conservative force proof) and Phase 05 (boundary loopholes).
 2. **Photon production (C1 violation):** The dynamic Casimir effect produces photons when boundaries move non-adiabatically. But the photon energy comes from mechanical work on the boundaries, not from vacuum energy. Phase 06 analyzes whether the complete energy budget ever permits $W_{\text{net}} > 0$.
 3. **Vacuum energy vs. interaction energy:** Argument B reminds us that "vacuum energy" between plates is really the interaction energy of the boundary conditions, not intrinsic vacuum energy. This reframing (Jaffe, 2005) is relevant to all gap scenarios.
+
+## 8. Combined Strength Assessment
+
+### Individual Argument Strengths
+
+| Argument | Strength | Mathematical Rigor | Physical Scope | Relevance to Casimir Extraction |
+|----------|----------|-------------------|----------------|--------------------------------|
+| **C: Passivity (P-W)** | **STRONG** | Exact theorem (spectral bound + unitarity). No approximations. Extends to complete passivity (multi-copy). | All cyclic unitaries on any quantum system with fixed $H$. Broadest class of operations covered. | Conditional --- applies only when plates are stationary ($H$ fixed). Strongest single constraint when applicable. |
+| **A: Thermodynamic** | **MODERATE** | Conservative force argument is exact. Second law generalization is axiom-dependent (assumes Kelvin--Planck at $T=0$, which passivity justifies). | Equilibrium and near-equilibrium thermodynamic cycles with fixed-material Casimir plates. | Direct --- addresses the specific Casimir engine scenario. Most practically relevant argument. |
+| **B: Lorentz Invariance** | **WEAK (for Casimir)** | Exact within its domain (group theory argument is rigorous). The $p = -\rho$ result is a theorem, not an approximation. | Free (unbounded) Lorentz-invariant vacuum only. | Inapplicable --- the Casimir effect exists precisely because B2 (no boundaries) is violated. Provides conceptual insight but no constraint on bounded systems. |
+
+### Complementarity Structure
+
+The three arguments are not merely redundant; they provide complementary coverage:
+
+1. **Argument B** establishes WHY vacuum energy cannot be extracted from the free vacuum: the equation of state $p = -\rho$ makes the vacuum thermodynamically inert. This is the conceptual foundation.
+
+2. **Argument A** translates this insight to the Casimir configuration: even though B2 is violated (boundaries exist), the Casimir force is conservative (A2), so cyclic work extraction gives $W_{\text{net}} = 0$. The second law strengthens this to $W_{\text{net}} \leq 0$ for non-quasi-static processes.
+
+3. **Argument C** provides the deepest justification: the ground state is passive (and completely passive), so no cyclic unitary can extract work. This is the quantum-mechanical foundation for both A and B.
+
+The logical hierarchy is: **C (quantum) $\Rightarrow$ A (thermodynamic) $\leftarrow$ B (field-theoretic insight)**
+
+### Combined Conclusion
+
+$$
+\boxed{W_{\text{net}} \leq 0 \text{ for any cyclic Casimir process with fixed materials and fixed (or adiabatic) Hamiltonian}}
+$$
+
+This conclusion is supported by all three arguments in their respective domains of validity. The combined coverage is broader than any single argument:
+- Argument A covers equilibrium thermodynamic cycles (including non-quasi-static via second law)
+- Argument C covers all cyclic unitaries (including far-from-equilibrium, but requires fixed $H$)
+- Argument B covers the free vacuum (conceptual foundation, not directly constraining for Casimir)
+
+## 9. Phase 01 Verdict and Forward Connections
+
+### Phase 01 Overall Verdict
+
+The three no-go arguments are:
+1. **Mutually consistent** --- no contradictions between any pair of the 14 assumptions
+2. **Genuinely independent** --- no argument's assumption set is a subset of another's
+3. **Complementary** --- they cover overlapping but distinct physical regimes
+4. **Collectively strong** --- the combined conclusion ($W_{\text{net}} \leq 0$) holds under broad conditions
+
+The identified coverage gap is:
+- **Precisely characterized:** time-dependent $H$ + boundaries + material property changes
+- **Physically meaningful:** corresponds to exactly the proposals (Pinto, dynamic Casimir) that claim extraction may be possible
+- **Targeted by later phases:** Phase 05 (boundary/material loopholes), Phase 06 (dynamic Casimir)
+
+### Connections to Later Phases
+
+| Later Phase | Connection to Phase 01 | Key Assumptions Tested |
+|-------------|----------------------|----------------------|
+| **Phase 02: Casimir force computation** | Uses the Casimir energy $E_{\text{Cas}}(a)$ from Eq. (A.1) as starting point. Must verify conservative force property (A2) computationally for realistic materials. | A2 (conservative force), A3 (material properties) |
+| **Phase 03: Conservative force proof** | Formalizes and proves A2 rigorously. Computes the energy cost of material changes (testing A3 violation). Energy budget analysis for Pinto-type proposals. | A2 (proof target), A3 (violation analysis) |
+| **Phase 04: Thermodynamic cycle analysis** | Full thermodynamic cycle calculation using A's framework. Tests whether non-ideal effects (friction, radiation loss) always make $W_{\text{net}} < 0$ strictly. | A1--A5 (full thermodynamic argument) |
+| **Phase 05: Boundary condition loopholes** | Directly targets B2 violation. Analyzes whether material property switching (A3 violation) can yield $W_{\text{net}} > 0$ after accounting for switching energy costs. | A3 (material switching), B2 (boundaries), C1 (if switching makes $H$ time-dependent) |
+| **Phase 06: Dynamic Casimir analysis** | Directly targets C1 violation. Analyzes whether non-adiabatic boundary motion can yield $W_{\text{net}} > 0$ after accounting for mechanical work input. | C1 (time-dependent $H$), B2 (boundaries) |
+
+### What Phase 01 Provides to Downstream Work
+
+1. **Precise assumption list (A1--A5, B1--B4, C1--C5):** Every later analysis can state exactly which assumption it is testing or violating.
+2. **Coverage map:** Shows where the no-go arguments leave room for potential extraction, guiding the search for loopholes.
+3. **Logical hierarchy (C $\Rightarrow$ A):** Identifies passivity as the most fundamental constraint, so the most promising loopholes target C1 (time-dependent $H$).
+4. **Strength ranking:** Prioritizes which loopholes are most worth pursuing (C1 violation > A3 violation > B2 violation, in terms of potential for genuine energy extraction).
