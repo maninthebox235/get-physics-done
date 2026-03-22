@@ -105,12 +105,13 @@ Plans:
 
 **Backtracking trigger:** If mode summation and Lifshitz formula disagree in overlapping regime by more than numerical tolerance, debug before proceeding
 
-**Plans:** TBD
+**Plans:** 3 plans
 
 Plans:
 
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md -- Ideal plates T=0: analytical formula + zeta-regularized mode summation benchmark (< 10^{-6})
+- [ ] 02-02-PLAN.md -- Lifshitz formula infrastructure: material models (Drude/plasma) + Matsubara summation framework
+- [ ] 02-03-PLAN.md -- Full benchmarking: cross-validate ideal via Lifshitz, Drude/plasma at T=300K, all 5 limiting cases
 
 ### Phase 03: Conservative Force Proof and Cycle Analysis
 
