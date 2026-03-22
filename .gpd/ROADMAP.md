@@ -42,7 +42,7 @@ This project investigates whether zero-point energy of the quantum vacuum can be
 
 - [x] **Phase 01: No-Go Theorem Derivations** - Derive three independent no-go arguments with explicit numbered assumptions and comparison table
 - [x] **Phase 02: Casimir Force Computation Framework** - Implement and benchmark Casimir force for ideal plates (T=0) and realistic materials (Lifshitz, Drude/plasma)
-- [ ] **Phase 03: Conservative Force Proof and Cycle Analysis** - Prove Casimir force is conservative for fixed materials; compute complete energy budget for quasi-static cycles
+- [x] **Phase 03: Conservative Force Proof and Cycle Analysis** - Prove Casimir force is conservative for fixed materials; compute complete energy budget for quasi-static cycles
 - [ ] **Phase 04: W_net Parameter Sweep** - Sweep W_net over (a_min, a_max, T) parameter space; confirm W_net=0 across full range
 - [ ] **Phase 05: Loophole Analysis -- Boundary and Topology** - Analyze boundary condition change (Pinto-type) and topology change loopholes with full energy accounting
 - [ ] **Phase 06: Loophole Analysis -- Non-Equilibrium and Dynamic Casimir** - Analyze non-equilibrium state loophole and dynamic Casimir loophole
@@ -138,8 +138,8 @@ Plans:
 
 Plans:
 
-- [ ] 03-01-PLAN.md -- Conservative force proof + T=0 cycle (analytical + numerical W_net = 0)
-- [ ] 03-02-PLAN.md -- Finite-T energy budget: 6 configurations (ideal/Drude/plasma), energy conservation verification
+- [x] 03-01-PLAN.md -- Conservative force proof + T=0 cycle (analytical + numerical W_net = 0)
+- [x] 03-02-PLAN.md -- Finite-T energy budget: 6 configurations (ideal/Drude/plasma), energy conservation verification
 
 ### Phase 04: W_net Parameter Sweep
 
@@ -299,7 +299,7 @@ Phases execute in numeric order: 01 -> 02 -> 03 -> (04, 05, 06 parallel where po
 | --- | --- | --- | --- |
 | 01. No-Go Theorem Derivations | 2/2 | Complete ✓ | 2026-03-22 |
 | 02. Casimir Force Computation | 3/3 | Complete ✓ | 2026-03-22 |
-| 03. Conservative Force Proof | 0/TBD | Not started | - |
+| 03. Conservative Force Proof | 2/2 | Complete ✓ | 2026-03-22 |
 | 04. W_net Parameter Sweep | 0/TBD | Not started | - |
 | 05. Boundary and Topology Loopholes | 0/TBD | Not started | - |
 | 06. Non-Equilibrium and Dynamic Casimir | 0/TBD | Not started | - |
