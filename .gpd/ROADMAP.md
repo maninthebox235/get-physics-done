@@ -162,11 +162,12 @@ Plans:
 
 **Backtracking trigger:** If systematic drift in W_net/|W_close| correlates with parameter regime (e.g., grows near thermal crossover), return to Phase 02/03 to check thermal corrections
 
-**Plans:** TBD
+**Plans:** 2 plans
 
 Plans:
 
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md -- Sweep infrastructure + coarse validation (4000 points, 3 materials, spot-check with double integral)
+- [ ] 04-02-PLAN.md -- Full production sweep (500k points) + visualization + analysis table
 
 ### Phase 05: Loophole Analysis -- Boundary and Topology
 
