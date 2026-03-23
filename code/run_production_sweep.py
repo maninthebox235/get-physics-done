@@ -4,8 +4,8 @@ Production parameter sweep for Plan 04-02.
 Runs the full production sweep for ideal (T=0), Drude, and plasma models.
 Grid adapted from 500k plan target to feasible sizes:
   - Ideal T=0: 50x50x1 = 2500 points (analytical, instant)
-  - Drude:      7x7x4  =  196 points (~15s/point, ~30 min)
-  - Plasma:     7x7x4  =  196 points (~15s/point, ~30 min)
+  - Drude:      8x8x3  =  192 points (~14s/point, ~37 min)
+  - Plasma:     8x8x3  =  192 points (~14s/point, ~37 min)
 
 DEVIATION [Rule 2 - Numerical]: Grid reduced from 100x100x50 = 500k to ~3500
 total points. Justification: eta = 0 by algebraic identity (conservative
@@ -101,17 +101,17 @@ def run_production_sweep():
     print(f"  Saved: {save_ideal}")
 
     # ===================================================================
-    # 2. Drude sweep (7x7x4)
+    # 2. Drude sweep (8x8x3)
     # ===================================================================
     print("\n" + "=" * 60)
-    print("PRODUCTION SWEEP: Drude (7x7x4)")
+    print("PRODUCTION SWEEP: Drude (8x8x3)")
     print("=" * 60)
 
     grid_drude = generate_grid(
-        n_amin=7, n_amax=7, n_T=4,
+        n_amin=8, n_amax=8, n_T=3,
         amin_range=(100e-9, 1e-6),
         amax_range=(200e-9, 10e-6),
-        T_range=(0.0, 300.0))
+        T_range=(100.0, 300.0))
 
     r_drude = run_sweep(
         grid_drude['a_min_grid'], grid_drude['a_max_grid'],
@@ -142,10 +142,10 @@ def run_production_sweep():
     print(f"  Saved: {save_drude}")
 
     # ===================================================================
-    # 3. Plasma sweep (7x7x4)
+    # 3. Plasma sweep (8x8x3)
     # ===================================================================
     print("\n" + "=" * 60)
-    print("PRODUCTION SWEEP: Plasma (7x7x4)")
+    print("PRODUCTION SWEEP: Plasma (8x8x3)")
     print("=" * 60)
 
     # Reuse same grid coordinates as Drude
