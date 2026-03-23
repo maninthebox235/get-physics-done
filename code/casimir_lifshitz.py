@@ -286,6 +286,152 @@ def lifshitz_force(a, T, epsilon_func, material_type='drude',
 
 
 # ---------------------------------------------------------------------------
+# Lifshitz free energy (finite T) -- for fast W_close computation
+# ---------------------------------------------------------------------------
+def lifshitz_free_energy_integrand(k_perp, a, xi_l, epsilon_val, is_l0=False,
+                                    material_type='drude', omega_p=None,
+                                    gamma=None):
+    """Free energy integrand for a single Matsubara term.
+
+    Returns: k_perp * sum_P ln(1 - r_P^2 * e^{-2*kappa_0*a})
+
+    This integrand, when summed over Matsubara frequencies with factor T/(2*pi),
+    gives the Casimir free energy per unit area.
+
+    Parameters: same as lifshitz_integrand.
+    Returns: float or ndarray [length^{-2}] (one less power of length than force).
+    """
+    k_perp = np.asarray(k_perp, dtype=float)
+
+    if is_l0:
+        kappa_0 = np.abs(k_perp)
+
+        if material_type == 'vacuum':
+            rTE = np.zeros_like(k_perp)
+            rTM = np.zeros_like(k_perp)
+        elif material_type == 'perfect':
+            rTE = -np.ones_like(k_perp)
+            rTM = np.ones_like(k_perp)
+        else:
+            rTM = r_TM_l0(k_perp)
+            if material_type == 'drude':
+                rTE = r_TE_l0_drude(k_perp, omega_p, gamma)
+            elif material_type == 'plasma':
+                rTE = r_TE_l0_plasma(k_perp, omega_p)
+            else:
+                raise ValueError(f"Unknown material_type: {material_type}")
+    else:
+        kappa_0, kappa = compute_kappas(k_perp, xi_l, epsilon_val)
+        rTE = reflection_TE(kappa_0, kappa)
+        rTM = reflection_TM(kappa_0, kappa, epsilon_val)
+
+    exp_factor = np.exp(-2.0 * kappa_0 * a)
+    result = np.zeros_like(k_perp)
+
+    for r_P in [rTE, rTM]:
+        r2 = r_P**2
+        arg = 1.0 - r2 * exp_factor
+        # Use log for free energy (not the force derivative)
+        with np.errstate(divide='ignore', invalid='ignore'):
+            log_val = np.log(np.where(arg > 0, arg, 1.0))
+        log_val = np.where(np.isfinite(log_val), log_val, 0.0)
+        result += log_val
+
+    return k_perp * result
+
+
+def matsubara_term_free_energy(l, a, T, epsilon_func, material_type='drude',
+                                omega_p=None, gamma=None):
+    """Compute a single Matsubara term for the free energy.
+
+    Returns: integral over k_perp of the free energy integrand.
+    Units: [length^{-2}] (to be multiplied by T/(2*pi) with primed sum weight).
+    """
+    xi_l = 2.0 * np.pi * l * T
+    is_l0 = (l == 0)
+
+    if is_l0:
+        epsilon_val = np.inf
+    elif material_type == 'perfect':
+        epsilon_val = 1e30
+    else:
+        epsilon_val = epsilon_func(np.array([xi_l]))[0]
+
+    def integrand_u(u):
+        k_perp = u / a
+        val = lifshitz_free_energy_integrand(
+            np.array([k_perp]), a, xi_l, epsilon_val,
+            is_l0=is_l0, material_type=material_type,
+            omega_p=omega_p, gamma=gamma
+        )
+        return val[0] / a  # Jacobian dk_perp/du = 1/a
+
+    result, error = integrate.quad(integrand_u, 0, np.inf,
+                                   limit=200, epsabs=1e-20, epsrel=1e-12)
+    return result
+
+
+def lifshitz_free_energy(a, T, epsilon_func, material_type='drude',
+                          omega_p=None, gamma=None, l_max=None):
+    """Compute the Casimir free energy per unit area using the Lifshitz formula.
+
+    F/A = (T/(2*pi)) * sum'_{l=0}^{l_max} matsubara_term_free_energy(l, ...)
+
+    The prime means the l=0 term has factor 1/2.
+
+    Parameters
+    ----------
+    a : float
+        Plate separation [length].
+    T : float
+        Temperature in natural units [length^{-1}].
+    epsilon_func : callable
+        Dielectric function epsilon(xi) -> dimensionless.
+    material_type : str
+        'drude', 'plasma', or 'perfect'.
+    omega_p : float or None
+        Plasma frequency [length^{-1}].
+    gamma : float or None
+        Drude relaxation [length^{-1}].
+    l_max : int or None
+        Maximum Matsubara index. If None, auto-determine.
+
+    Returns
+    -------
+    float
+        Free energy per unit area [length^{-3}]. Negative (attractive binding).
+    """
+    # l=0 term
+    term_0 = matsubara_term_free_energy(0, a, T, epsilon_func, material_type,
+                                         omega_p, gamma)
+    # l=1 term for convergence reference
+    term_1 = matsubara_term_free_energy(1, a, T, epsilon_func, material_type,
+                                         omega_p, gamma)
+
+    if l_max is None:
+        threshold = 1e-12 * abs(term_1) if term_1 != 0 else 1e-30
+        total = 0.5 * term_0 + term_1
+        l = 2
+        while True:
+            term_l = matsubara_term_free_energy(l, a, T, epsilon_func,
+                                                 material_type, omega_p, gamma)
+            total += term_l
+            if abs(term_l) < threshold:
+                break
+            l += 1
+            if l > 100000:
+                break
+    else:
+        total = 0.5 * term_0
+        for l in range(1, l_max + 1):
+            total += matsubara_term_free_energy(l, a, T, epsilon_func,
+                                                material_type, omega_p, gamma)
+
+    # F/A = (T/(2*pi)) * sum'
+    return (T / (2.0 * np.pi)) * total
+
+
+# ---------------------------------------------------------------------------
 # Lifshitz force at T = 0 (sum -> integral over xi)
 # ---------------------------------------------------------------------------
 def lifshitz_force_T0(a, epsilon_func=None, material_type='perfect'):

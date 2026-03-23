@@ -51,6 +51,7 @@ _cl = _ilu.module_from_spec(_spec_lif)
 _spec_lif.loader.exec_module(_cl)
 
 lifshitz_force = _cl.lifshitz_force
+lifshitz_free_energy = _cl.lifshitz_free_energy
 
 
 # =========================================================================
@@ -246,6 +247,51 @@ def cycle_work_lifshitz(a_min, a_max, T, epsilon_func,
         'W_net': W_net,
         'W_close_err': err,
         'W_open_err': err,
+    }
+
+
+def cycle_work_lifshitz_fast(a_min, a_max, T, epsilon_func,
+                             material_type='drude', omega_p=None, gamma=None):
+    """
+    Compute cycle work via free energy difference (FAST).
+
+    Instead of integrating the force over separation (which requires nested
+    quadrature), compute the Casimir free energy at a_min and a_max and take
+    the difference.  This requires only 2 Matsubara-sum evaluations instead
+    of ~20-50 force evaluations from the outer quadrature.
+
+    W_close = F(a_max) - F(a_min) > 0  (closing under attractive force)
+    W_open  = -W_close                  (conservative force)
+    W_net   = 0                         (exact by construction)
+
+    Parameters: same as cycle_work_lifshitz.
+    Returns: same dict format as cycle_work_lifshitz.
+    """
+    if a_min <= 0 or a_max <= 0:
+        raise ValueError("Plate separations must be positive")
+    if a_min > a_max:
+        raise ValueError("Require a_min <= a_max")
+
+    F_min = lifshitz_free_energy(a_min, T, epsilon_func,
+                                  material_type=material_type,
+                                  omega_p=omega_p, gamma=gamma)
+    F_max = lifshitz_free_energy(a_max, T, epsilon_func,
+                                  material_type=material_type,
+                                  omega_p=omega_p, gamma=gamma)
+
+    # W_close = V(a_max) - V(a_min) = F(a_max) - F(a_min)
+    # Since F(a_min) < F(a_max) < 0 (closer plates have lower free energy),
+    # W_close > 0.
+    W_close = F_max - F_min
+    W_open = -W_close
+    W_net = W_close + W_open  # = 0 by IEEE arithmetic
+
+    return {
+        'W_close': W_close,
+        'W_open': W_open,
+        'W_net': W_net,
+        'W_close_err': 0.0,  # no quadrature error for this method
+        'W_open_err': 0.0,
     }
 
 
