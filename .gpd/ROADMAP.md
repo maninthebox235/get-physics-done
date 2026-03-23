@@ -21,7 +21,7 @@ This project investigates whether zero-point energy of the quantum vacuum can be
 | claim-nogo-consistency: Three no-go arguments consistent | claim | 01, 07 | Planned |
 | claim-loophole-analysis: Four loopholes classified | claim | 05, 06, 07 | Planned |
 | deliv-energy-budget: Complete energy budget table | deliverable | 03, 04 | Planned |
-| deliv-param-sweep: W_net parameter sweep figure | deliverable | 04 | Planned |
+| deliv-param-sweep: W_net parameter sweep figure | deliverable | 04 | Complete |
 | deliv-nogo-derivation: No-go derivations + assumption table | deliverable | 01 | Planned |
 | deliv-loophole-report: Loophole verdicts with energy accounting | deliverable | 05, 06, 07 | Planned |
 | deliv-casimir-reproduction: Casimir force benchmark figure | deliverable | 02 | Planned |
@@ -43,7 +43,7 @@ This project investigates whether zero-point energy of the quantum vacuum can be
 - [x] **Phase 01: No-Go Theorem Derivations** - Derive three independent no-go arguments with explicit numbered assumptions and comparison table
 - [x] **Phase 02: Casimir Force Computation Framework** - Implement and benchmark Casimir force for ideal plates (T=0) and realistic materials (Lifshitz, Drude/plasma)
 - [x] **Phase 03: Conservative Force Proof and Cycle Analysis** - Prove Casimir force is conservative for fixed materials; compute complete energy budget for quasi-static cycles
-- [ ] **Phase 04: W_net Parameter Sweep** - Sweep W_net over (a_min, a_max, T) parameter space; confirm W_net=0 across full range
+- [x] **Phase 04: W_net Parameter Sweep** - Sweep W_net over (a_min, a_max, T) parameter space; confirm W_net=0 across full range (completed 2026-03-23)
 - [ ] **Phase 05: Loophole Analysis -- Boundary and Topology** - Analyze boundary condition change (Pinto-type) and topology change loopholes with full energy accounting
 - [ ] **Phase 06: Loophole Analysis -- Non-Equilibrium and Dynamic Casimir** - Analyze non-equilibrium state loophole and dynamic Casimir loophole
 - [ ] **Phase 07: Synthesis and Conclusions** - Synthesize all results into unified analysis with final feasibility verdict

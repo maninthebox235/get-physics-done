@@ -5,23 +5,23 @@
 See: .gpd/PROJECT.md
 
 **Core research question:** Can zero-point energy of the quantum vacuum be extracted as usable work through cyclic processes involving boundary condition changes?
-**Current focus:** Phase 03 complete; ready for Phase 04
+**Current focus:** Phase 04 complete; ready for Phase 05
 
 ## Current Position
 
-**Current Phase:** 03 (complete)
-**Current Phase Name:** Conservative Force Proof and Cycle Analysis
+**Current Phase:** 04 (complete)
+**Current Phase Name:** W_net Parameter Sweep
 **Total Phases:** 7
 **Current Plan:** 2/2 complete
 **Total Plans in Phase:** 2
 **Status:** Phase complete ✓
-**Last Activity:** Phase 03 execution — all plans passed verification (6/6 contract targets, 46/46 tests)
+**Last Activity:** Phase 04 execution — W_net = 0 at all 2295 grid points for ideal/Drude/plasma; 3 figures + results table produced
 
-**Progress:** [████░░░░░░] 43%
+**Progress:** [█████░░░░░] 57%
 
 ## Active Calculations
 
-None (all Phase 03 code validated and tested).
+None (all Phase 04 code validated and tested).
 
 ## Intermediate Results
 
@@ -72,6 +72,8 @@ None (all Phase 03 code validated and tested).
 | Phase 02, Plan 03 | ~13 min | 2 | 4 |
 | Phase 03, Plan 01 | ~6 min | 2 | 3 |
 | Phase 03, Plan 02 | ~33 min | 2 | 4 |
+| Phase 04, Plan 01 | ~35 min | 2 | 5 |
+| Phase 04, Plan 02 | ~25 min | 2 | 10 |
 
 ## Accumulated Context
 
@@ -85,6 +87,17 @@ None (all Phase 03 code validated and tested).
 - High-T classical limit: -Tζ(3)/(4πa³) for perfect conductor, -Tζ(3)/(8πa³) for Drude
 - W_net set to 0.0 exactly in analytical function (algebraic identity); computed by addition in numerical function (serves as test)
 - cycle_work_lifshitz integrates once (conservative force ⇒ W_open = -W_close); double_integral variant added for independent verification
+
+### Phase 04 (W_net Parameter Sweep)
+
+- **Sweep infrastructure:** parameter_sweep.py with fast free-energy method (~10s/point Lifshitz)
+- **Coarse validation:** 5×5×3 grid, all eta = 0.0 for ideal/Drude/plasma
+- **Production sweep:** 2295 total points (2175 ideal + 60 Drude + 60 plasma), all eta = 0.0
+- **W_close range:** [1.80e+15, 1.37e+22] m⁻³ (ideal), [0, 7.04e+18] (Drude), [0, 7.20e+18] (Plasma)
+- **Drude-plasma discrepancy:** 2–29% in W_close, confirming non-trivial computation
+- **Grid reduced** from 500k to ~2300 points (each Lifshitz point takes ~10-20s)
+- **Key insight:** eta = 0 is algebraic identity (conservative force), not numerical convergence
+- **Figures:** 3 publication-quality PDFs (eta heatmaps, W_close landscape, eta summary)
 
 ### Active Approximations
 
@@ -119,6 +132,6 @@ None
 
 ## Session Continuity
 
-**Last session:** 2026-03-22
-**Stopped at:** Phase 03 complete, ready for Phase 04
-**Resume file:** .gpd/phases/03-conservative-force-proof-and-cycle-analysis/03-VERIFICATION.md
+**Last session:** 2026-03-23
+**Stopped at:** Phase 04 complete, ready for Phase 05
+**Resume file:** .gpd/phases/04-w-net-parameter-sweep/04-02-SUMMARY.md
