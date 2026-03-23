@@ -1,0 +1,24 @@
+==========================================================================================
+PARAMETER SWEEP RESULTS TABLE
+Phase 04: W_net Parameter Sweep
+Reference: Casimir (1948), Lifshitz (1956)
+==========================================================================================
+
+Material    N_valid     max(eta)    mean(eta)   min(W_close)   max(W_close)
+------------------------------------------------------------------------------------------
+ideal          2175     0.00e+00     0.00e+00     1.8024e+15     1.3708e+22
+drude            60     0.00e+00     0.00e+00     0.0000e+00     7.0448e+18
+plasma           60     0.00e+00     0.00e+00     0.0000e+00     7.2018e+18
+------------------------------------------------------------------------------------------
+
+Drude-Plasma discrepancy:
+  min: 1.97%
+  max: 29.03%
+  mean: 7.49%
+
+CONCLUSION: W_net = 0 at every grid point for all materials.
+eta = |W_net|/|W_close| = 0 (algebraic identity for conservative force).
+No vacuum energy extraction possible from quasi-static Casimir plate cycles.
+
+Grid note: Adapted from 500k plan target due to ~10-20s/point Lifshitz cost.
+The result eta = 0 is algebraic, not numerical convergence.
